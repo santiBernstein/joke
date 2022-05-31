@@ -119,3 +119,22 @@ function test() {
   });
 }
 test();
+
+// get jokes from joke API
+async function getJokes() {
+    let joke = '';
+    const apiUrl = 'https://v2.jokeapi.dev/joke/Programming,Christmas?blacklistFlags=nsfw,racist,sexist';
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data.setup){
+            joke = `${data.setup} ... ${data.delivery}`;
+        } else {
+            joke = data.joke;
+        }
+        console.log(joke);
+    } catch (error) {
+        console.log('todo mal', error);
+    }
+}
+getJokes();
